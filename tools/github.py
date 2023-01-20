@@ -8,7 +8,7 @@ load_dotenv()
 
 #i'm providing username and API-Token in headers like
 url = 'https://api.github.com/repos/octocat/Spoon-Knife/issues'
-headers = {'Authorization': 'token ' + os.getenv('GITHUB_TOKEN')}
+headers = {'Authorization': 'token ' + os.getenv('MY_TOKEN')}
 
 login = requests.get('https://api.github.com/user', headers=headers)
 print(login.json())
