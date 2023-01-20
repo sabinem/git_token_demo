@@ -23,7 +23,7 @@ jobs:
           pip install -r requirements.txt
       - name: Test with pytest
         env:
-          MY_TOKEN: ${{ secret.MY_TOKEN }}
-          MY_USER: ${{ secret.MY_USER }}
+          MY_TOKEN: ${{ secrets.MY_TOKEN }}
+          MY_USER: ${{ secrets.MY_USER }}
         run: |
           pytest
