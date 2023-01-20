@@ -22,12 +22,5 @@ jobs:
           pip install pytest
           pip install -r requirements.txt
       - name: Test with pytest
-        with:
-          .env
-          .github/
-          .gitignore
-          .idea/
-          tests/__pycache__/
-          tools/
         run: |
           pytest
