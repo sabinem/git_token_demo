@@ -23,6 +23,6 @@ jobs:
           pip install -r requirements.txt
       - name: Test with pytest
         env:
-          MY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pytest
