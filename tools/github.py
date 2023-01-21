@@ -1,17 +1,29 @@
 import requests
 from dotenv import load_dotenv
-import pdb
 import os
 
 load_dotenv()
 
+url = "https://api.github.com/repos/octocat/Spoon-Knife/issues"
+try:
+    github_token = os.environ["GITHUB_TOKEN"]
+    headers = {"Authorization": f"token {github_token}"}
 
-#i'm providing username and API-Token in headers like
-url = 'https://api.github.com/repos/octocat/Spoon-Knife/issues'
-headers = {'Authorization': 'token ' + os.getenv('MY_TOKEN')}
+    login = requests.get("https://api.github.com/user", headers=headers)
+    login_msg = login.json().get("message")
+    if login_msg:
+        print(login_msg)
+    else:
+        print("login successful")
+except KeyError:
+    headers = {}
+    msg = (
+        "Warning: the command will be run without github credentials.\n- This might "
+        "cause the github rate limit to be exceeded.\n- To fix this please look in the "
+        "readme on how to provide your github credentials"
+    )
+    print(msg)
 
-login = requests.get('https://api.github.com/user', headers=headers)
-print(login.json())
 
 def f_auth(count):
     res = requests.get(url, headers=headers)
