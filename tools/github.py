@@ -6,16 +6,13 @@ load_dotenv()
 
 url = "https://api.github.com/repos/octocat/Spoon-Knife/issues"
 try:
-    github_token = os.environ["GITHUB_TOKEN"]
+    github_token = os.environ.get("GITHUB_TOKEN")
+    assert github_token
     headers = {"Authorization": f"token {github_token}"}
 
     login = requests.get("https://api.github.com/user", headers=headers)
-    login_msg = login.json().get("message")
-    if login_msg:
-        print(login_msg)
-    else:
-        print("login successful")
-except KeyError:
+    assert login.json().get("login")
+except AssertionError:
     headers = {}
     msg = (
         "Warning: the command will be run without github credentials.\n- This might "
